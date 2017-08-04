@@ -1,0 +1,96 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>{{name}}</td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td>{{age}}</td>
+  </tr>
+  <tr>
+    <td>Email Address</td>
+    <td>{{email}}</td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td>
+      <p>
+        {{address.street}},<br />
+        {{address.city}},<br />
+        {{address.state}}<br />
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>Hobbies</td>
+    <td>
+      <input type = 'text' [(ngModel)]='newHobby' />
+      <div style='margin:1em; margin-left:0'>
+        <button (click)="clickHandle()">Add Hobby</button>
+        <button (click)='toggleShowHobbies()'>{{!showHobbies?'Show':'Hide'}} Hobbies</button>
+      </div>
+      <ol *ngIf='showHobbies'>
+        <li *ngFor = 'let hobby of hobbies'>
+          {{hobby}}
+        </li>
+      </ol>
+    </td>
+  </tr>
+</table>
+<div>
+  <h3>New Post</h3>
+  <form [formGroup]='newPost' (ngSubmit)='submitPost(newPost.value, newPost.valid)'>
+    <div>
+      <label>Post ID</label>
+      <div><input type='number'  formControlName='id'/></div>
+    </div>
+    <div>
+      <label>Author ID</label>
+      <div>
+        <input type='number'  formControlName='userId'/>
+      </div>
+    </div>
+    <div>
+      <label>Title</label>
+      <div>
+        <input type='text'  formControlName='title'/>
+      </div>
+    </div>
+    <div>
+      <label>Body</label>
+      <div>
+        <textarea formControlName='body'></textarea>
+      </div>
+    </div>
+    <div><button type='submit'>Submit</button></div>
+  </form>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<button (click)='toggleShowPosts()'>{{showPosts?'Hide':'Show'}} Posts</button><hr />
+<div *ngIf='showPosts'>
+  <h2>Posts</h2>
+  <hr />
+  <br>
+  <br>
+  <br>
+  <div *ngFor = 'let post of posts'>
+    <a
+    href='/post/{{post.id}}'
+    style='text-decoration:none; color:#272727'
+    onMouseOver="this.style.color='#0F0'"
+    onMouseOut="this.style.color='#00F'">
+      <h3>{{post.title}}</h3>
+    </a>
+    <hr />
+    <p>
+      {{post.body}}
+    </p>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
